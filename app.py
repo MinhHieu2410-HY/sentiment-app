@@ -296,19 +296,6 @@ with st.sidebar:
     tfidf, model, le, meta = load_model()
     is_demo = meta.get("is_demo", False)
 
-    st.markdown("### 🤖 Thông tin mô hình")
-    if is_demo:
-        st.warning("⚠️ Demo model\n\nChạy `train_model.py` để dùng full model")
-    else:
-        st.success("✅ Full model")
-
-    col1, col2 = st.columns(2)
-    col1.metric("Accuracy", f"{meta.get('accuracy', 0):.1%}")
-    col2.metric("F1 macro", f"{meta.get('f1_macro', 0):.1%}")
-
-    st.caption(f"Classes: {', '.join(le.classes_)}")
-    st.caption(f"Vocab: {len(tfidf.vocabulary_):,} tokens")
-
     st.markdown("---")
     st.markdown("### 📈 Phiên này")
     n_pos = sum(1 for _, l, _, _ in st.session_state.history if l == "positive")
@@ -337,21 +324,6 @@ with st.sidebar:
 if "Phân tích đơn lẻ" in page:
     st.markdown("# 🔍 Phân tích Cảm xúc Review")
     st.markdown("Nhập một đoạn review bằng **tiếng Anh** để phân tích cảm xúc.")
-
-    # ── Example reviews
-    with st.expander("💡 Xem ví dụ review mẫu"):
-        col1, col2, col3 = st.columns(3)
-        ex_pos = "This product is absolutely amazing! Best purchase I've ever made. The quality exceeded all my expectations."
-        ex_neu = "The product is okay, nothing special but it does the job. Average quality for the price paid."
-        ex_neg = "Terrible product! Completely broken after one day of use. Worst purchase ever, total waste of money."
-        if col1.button("😊 Positive mẫu"):
-            st.session_state["example_text"] = ex_pos
-        if col2.button("😐 Neutral mẫu"):
-            st.session_state["example_text"] = ex_neu
-        if col3.button("😞 Negative mẫu"):
-            st.session_state["example_text"] = ex_neg
-
-    default_text = st.session_state.get("example_text", "")
 
     # ── Input
     review_text = st.text_area(
