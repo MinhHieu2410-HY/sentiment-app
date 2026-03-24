@@ -329,13 +329,16 @@ if "Phân tích đơn lẻ" in page:
         placeholder="e.g. This product is absolutely amazing, I love it so much!",
         key="review_input",
     )
-
+    
+    def clear_text():
+    st.session_state["review_input"] = ""
+    
     col_btn, col_clear = st.columns([1, 4])
     analyze_btn = col_btn.button("🚀 Phân tích", type="primary", use_container_width=True)
     col_clear.button(
         "🔄 Xóa",
         use_container_width=False,
-        on_click=clear_text
+        on_click = clear_text
     )
 
     word_count = len(review_text.split()) if review_text.strip() else 0
