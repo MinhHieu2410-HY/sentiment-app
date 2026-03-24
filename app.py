@@ -319,21 +319,20 @@ if "Phân tích đơn lẻ" in page:
     st.markdown("# 🔍 Phân tích Cảm xúc Review")
     st.markdown("Nhập một đoạn review bằng **tiếng Anh** để phân tích cảm xúc.")
 
-    default_text = st.session_state.get("example_text", "")
-
     # ── Input
     review_text = st.text_area(
         "✏️ Nhập review của bạn:",
         value="",
         height=140,
         placeholder="e.g. This product is absolutely amazing, I love it so much!",
-        key="review_input",
+        key="review_input",                     # this key is what we will reset
     )
     
     col_btn, col_clear = st.columns([1, 4])
     analyze_btn = col_btn.button("🚀 Phân tích", type="primary", use_container_width=True)
+    
     if col_clear.button("🔄 Xóa", use_container_width=False):
-        st.session_state["example_text"] = ""
+        st.session_state["review_input"] = ""  
         st.rerun()
 
     word_count = len(review_text.split()) if review_text.strip() else 0
