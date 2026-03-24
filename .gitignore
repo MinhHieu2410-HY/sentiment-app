@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Large data files (DO NOT commit to GitHub)
+*.csv
+*.tsv
+*.parquet
+*.feather
+
+# ─── Model files ─────────────────────────────────────────────────────────────
+# Option A: track model files (OK if under 100 MB each)
+# Remove the lines below if you want to commit your trained models
+# models/*.joblib
+# models/*.pkl
+
+# Option B: EXCLUDE model files (use if they are too large)
+# Uncomment these if your models exceed GitHub's 100 MB limit:
+# models/tfidf_vectorizer.joblib
+# models/logistic_regression.joblib
+# models/label_encoder.joblib
+# models/model_meta.joblib
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Streamlit cache
+.streamlit/secrets.toml
