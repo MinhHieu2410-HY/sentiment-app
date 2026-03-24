@@ -319,21 +319,22 @@ if "Phân tích đơn lẻ" in page:
     st.markdown("# 🔍 Phân tích Cảm xúc Review")
     st.markdown("Nhập một đoạn review bằng **tiếng Anh** để phân tích cảm xúc.")
 
-    # ── Input
+    # Define a callback to clear the text area
+    def clear_review_input():
+        st.session_state["review_input"] = ""
+
+    # Text area bound to session state
     review_text = st.text_area(
         "✏️ Nhập review của bạn:",
         value="",
         height=140,
         placeholder="e.g. This product is absolutely amazing, I love it so much!",
-        key="review_input",                     # this key is what we will reset
+        key="review_input",
     )
-    
+
     col_btn, col_clear = st.columns([1, 4])
     analyze_btn = col_btn.button("🚀 Phân tích", type="primary", use_container_width=True)
-    
-    if col_clear.button("🔄 Xóa", use_container_width=False):
-        st.session_state["review_input"] = ""  
-        st.rerun()
+    col_clear.button("🔄 Xóa", on_click=clear_review_input, use_container_width=False)
 
     word_count = len(review_text.split()) if review_text.strip() else 0
     st.caption(f"📝 {word_count} từ")
